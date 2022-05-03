@@ -22,4 +22,4 @@
 
 # Elasticsearch::Model.client = Elasticsearch::Client.new(config) # default client
 
-Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV['ES_HOST'],  transport_options: { ssl: { verify: false } }
+Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV['ES_HOST'] || 'localhost',  transport_options: { ssl: { verify: false } }

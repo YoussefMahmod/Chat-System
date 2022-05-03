@@ -11,7 +11,7 @@ class MessagesWorker
       ActiveRecord::Base.connection_pool.with_connection do
         message_json = JSON.parse(raw_message)
         message = Message.new(message_json)
-        if message.save
+        if message.save!
           puts message_json
           ack! # we need to let queue know that message was received and processed
         else
