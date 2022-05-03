@@ -1,0 +1,85 @@
+version: "2"
+services:
+  mysql:
+    image: "mysql:5.7"
+    restart: always
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=instabug
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3307:3306"
+
+  redis:
+    image: redis:4.0-alpine
+    restart: always
+    volumes:
+      - ./volumes/redis:/var/lib/redis
+    command: redis-server
+
+  rabbitmq:
+    image: rabbitmq:3.6.9-alpine
+    command: rabbitmq-server
+    expose:
+      - 5672
+      - 15672
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5672"]
+      interval: 5s
+      timeout: 15s
+      retries: 1
+
+  es:
+    image: elasticsearch:5.4.0-alpine
+    restart: always
+    ports:
+      - "9300:9200"
+    volumes:
+      - ./volumes/es:/usr/share/elasticsearch/data
+
+  web:
+    build: .
+    command: sh -c "sh wait-curl.sh es:9200 && sh ./init.sh && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "4000:3000"
+    links:
+      - mysql
+      - redis
+      - es
+      - rabbitmq
+    environment:
+      - DB_NAME=instabug
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASS=password
+      - DB_PASSWORD=password
+      - REDIS_HOST=redis
+      - RABBITMQ_HOST=rabbitmq
+      - ES_HOST=es
+
+  worker:
+    build: .
+    command: sh -c "sh wait-curl.sh es:9200 && bundle exec rake sneakers:run WORKERS=ChatsWorker,MessagesWorker"
+    restart: always
+    volumes:
+      - .:/app
+    links:
+      - mysql
+      - redis
+      - es
+      - rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+    environment:
+      - WORKERS=ChatsWorker
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+      - RABBITMQ_HOST=rabbitmq
+      - ES_HOST=es

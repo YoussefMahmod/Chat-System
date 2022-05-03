@@ -1,0 +1,10 @@
+# development: &default
+#   host: "https://elasticsearch:9200"
+#   log: true
+# test:
+#   host: "https://elasticsearch:9200"
+
+# transport.tcp.port: 9300
+# http.port: 9200
+
+# production:
