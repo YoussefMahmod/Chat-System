@@ -13,7 +13,7 @@ gem 'sneakers'
 gem 'thread'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-gem +'elasticsearch', "< 7.14"
+gem 'elasticsearch', "< 7.14"
 gem 'whenever', require: false
 
 

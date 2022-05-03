@@ -11,14 +11,19 @@
 3. Add an endpoint for searching through messages of a specific chat. It should be able to partially
    match `messages’ bodies`. You must use `ElasticSearch` for this.
 
-4. Try to minimize the queries and `avoid writing directly to MySQL` while serving the
+4. The applications table should contain a column called chats_count that contains the number of
+   chats for this application. Similarly, the chats table should contain a column called
+   messages_count that contains the number of messages in this chat. These columns don’t have
+   to be live. However, they shouldn’t be lagging more than 1 hour.
+
+5. Try to minimize the queries and `avoid writing directly to MySQL` while serving the
    requests(especially for the chats and messages creation endpoints). You can use a queuing
    system to achieve that.
-5. optimize your tables by adding appropriate `indices`.
+6. optimize your tables by adding appropriate `indices`.
 
-6. Your app should be containerized. We will only write `docker-compose up` to run the whole
+7. Your app should be containerized. We will only write `docker-compose up` to run the whole
    stack if it doesn’t work, the task fails.
-7. Write Specs.
+8. Write Specs.
 
 ## My Approach
 
@@ -58,14 +63,21 @@ After looking up the possible ways that this could be done, I guess using [`Ngra
 <br>
 <br>
 
-> ### From Requirement 4 we need to set a messaging queue
+> ### From Requirement 4 we need to schedule task to update messages_count and chats_count
+
+After looking up i found a gem called [`Whenever`](https://github.com/javan/whenever) which we can use to schedule tasks easily.
+
+<br>
+<br>
+
+> ### From Requirement 5 we need to set a messaging queue
 
 I think [`RabbitMQ`](https://www.rabbitmq.com/tutorials/tutorial-one-ruby.html) fit well with our needs
 
 <br>
 <br>
 
-> ### From Requirement 5 we need to adjust the database indices to minimize the response time.
+> ### From Requirement 6 we need to adjust the database indices to minimize the response time.
 
 ![API DB Design with indexing](readmeUtls/photos/Database%20Indexing.png)
 I assume that we are using B-Tree indexing
@@ -107,7 +119,7 @@ I assume that we are using B-Tree indexing
   <br>
   <br>
 
-> ### From Requirement 6 we need to compose up elasticsearch, mysql, rabbitmq, rails.
+> ### From Requirement 7 we need to compose up elasticsearch, mysql, rabbitmq, rails.
 
 Actually, this is my first time touching docker but it doesn't really matter and my time ran out because of my exams so i'll KISS for Now and i'll optimized configuration in the future.
 
@@ -130,6 +142,6 @@ Stop the app using `docker-compose down`!
 <br>
 <br>
 
-> ### From Requirement 7 we need to write specs for our api.
+> ### From Requirement 8 we need to write specs for our api.
 
 - `⚠ under construction!`.
