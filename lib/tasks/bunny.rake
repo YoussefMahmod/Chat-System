@@ -3,6 +3,7 @@ namespace :rabbitmq do
   task :setup => :environment do
     require "bunny"
     conn = Bunny.new(:host => ENV['RABBITMQ_HOST'] || 'localhost')
+
     conn.start
 
     ch = conn.create_channel

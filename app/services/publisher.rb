@@ -39,7 +39,7 @@ class Publisher
   # put any specific RabbitMQ settings
   # like host or port
   def self.connection
-    @connection ||= Bunny.new.tap do |c|
+    @connection ||= Bunny.new(:host => ENV['RABBITMQ_HOST'] || 'localhost').tap do |c|
       c.start
     end
   end
