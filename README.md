@@ -125,6 +125,8 @@ Actually, this is my first time touching docker but it doesn't really matter and
 
 Update 1: I have an issue with messages worker i don't know why i can't up both of sneakers workers at the same time!! you can test workers locally it works correctly(I've no time due to my delayed midterm and Lab exam so i'll try to implement it in the future ISA).
 
+Update 2: I fixed issues i think everything up correctly now finally!.
+
 #### Requirements
 
 For sure you need to have [Docker](https://docker.io) and [Docker Compose](https://docs.docker.com/compose/install/) installed.
