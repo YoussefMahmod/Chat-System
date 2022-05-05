@@ -25,7 +25,7 @@ set :output, "log/cron.log"
 #Sets the environment to run during development mode (Set to production by default)
 set :environment, "development"
 
-every 45.minutes do
+every 30.minutes do
   runner "Chat.update_messages_counter"
   runner "Application.update_chats_counter"
 end
