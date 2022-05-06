@@ -187,7 +187,8 @@ RabbitMQ has two workers:
 
 - Chats Worker
 - Messages Worker
-  to run these workers
+
+to run these workers
 
 ```bash
 $ bundle exec rake sneakers:run WORKERS=ChatsWorker,MessagesWroker
