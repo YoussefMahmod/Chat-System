@@ -139,7 +139,11 @@ Use the following command to run the app on [localhost:4000](localhost:4000)
 docker-compose up -d
 ```
 
-Stop the app using `docker-compose down`!
+Stop the app using
+
+```sh
+docker-compose down
+```
 
 <br>
 <br>
@@ -147,3 +151,59 @@ Stop the app using `docker-compose down`!
 > ### From Requirement 8 we need to write specs for our api.
 
 - `⚠ under construction!`.
+
+<br>
+<br>
+
+## Getting start locally
+
+To get started with the api, **clone** the repo and then install the needed gems:
+
+```bash
+bundle install
+```
+
+Next, create and migrate the database:
+
+```bash
+rails db:create
+rails db:migrate
+```
+
+Finally Run rails server
+
+```bash
+rails server
+```
+
+### Note Make sure that our services are up on default ports
+
+- Rails : 4000
+- Mysql : 3306
+- Elastic-Search: 9200
+- RabbitMQ: 5672
+
+RabbitMQ has two workers:
+
+- Chats Worker
+- Messages Worker
+  to run these workers
+
+```bash
+$ bundle exec rake sneakers:run WORKERS=ChatsWorker,MessagesWroker
+```
+
+## These are my Postman endpoints.
+
+<br>
+Applications Endpoints:
+
+[![Applications Endpoints](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/15100078-157660e9-784e-4b7e-8922-284c6a8eb9ec?action=collection%2Ffork&collection-url=entityId%3D15100078-157660e9-784e-4b7e-8922-284c6a8eb9ec%26entityType%3Dcollection%26workspaceId%3D19872ff9-bb3b-4fed-a88f-f59f30314549)
+
+Chats Endpoints:
+
+[![Chats Endpoints](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/15100078-783fc14e-26e8-4c60-ae2a-ed2201391075?action=collection%2Ffork&collection-url=entityId%3D15100078-783fc14e-26e8-4c60-ae2a-ed2201391075%26entityType%3Dcollection%26workspaceId%3D19872ff9-bb3b-4fed-a88f-f59f30314549)
+
+Messages Endpoints:
+
+[![Messages Endpoints](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/15100078-f8548811-02b1-44d5-a9ac-32452bd107ed?action=collection%2Ffork&collection-url=entityId%3D15100078-f8548811-02b1-44d5-a9ac-32452bd107ed%26entityType%3Dcollection%26workspaceId%3D19872ff9-bb3b-4fed-a88f-f59f30314549)
