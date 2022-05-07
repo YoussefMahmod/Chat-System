@@ -148,9 +148,11 @@ docker-compose down
 <br>
 <br>
 
-> ### From Requirement 8 we need to write specs for our api.
+> ### From Requirement 8 we need to write specs for our api(in-progress).
 
-- `⚠ under construction!`.
+<!---TODO:--> <br>
+
+- [ ] 💡 I'll use [Faker]('https://github.com/faker-ruby/faker') to generate fake/random data and just make reqs with these data and verify the response that we got back.
 
 <br>
 <br>
