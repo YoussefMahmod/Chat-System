@@ -25,8 +25,6 @@ RSpec.describe Chat, type: :model do
 
   # ensure that app_token is present before saving
   it { should validate_presence_of(:app_token_fk) }
-  # ensure that app_token is unique
-  it { should validate_uniqueness_of(:app_token_fk) }
   
   # ensure that messages_count is present before saving
   it { should validate_presence_of(:messages_count) }

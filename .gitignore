@@ -27,3 +27,6 @@
 /config/master.key
 
 volumes/*/
+
+# Ignore env variables
+config/local_env.yml
