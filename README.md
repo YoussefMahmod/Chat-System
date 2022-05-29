@@ -29,11 +29,9 @@ Actually that's my first time use ruby and ruby on rails, so maybe my code could
 
 ## My Approach
 
-As I love diagrams so I intialized a startup system design diagram.
+I intialized a startup system design diagram.
+![API System Design](https://user-images.githubusercontent.com/53763508/170862171-f522d0f6-5845-44e0-ae30-e8a26664b6f9.png)
 
-![API System Design](readmeUtls/photos/system%20design.png)
-
-<br>
 <br>
 
 > ### From the Requirements 1, 2
@@ -48,19 +46,16 @@ My Routes
 ![API Routes](readmeUtls/photos/my%20routes.png)
 
 <br>
-<br>
 
 > ### From Requirement 2 every chat and message should have a unique serialized identifier.
 
 I Think we can achieve Database Side, but i choosed to go with [`Redis INCR`](https://redis.io/commands/incr/) operator it's very fast O(1) and work atomically.
 
 <br>
-<br>
 
 > ### From Requirement 3 we need to partially filter messages bodies using elasticsearch (it's similar to MySql wildcard '%messages bodies%' ).
 
 After looking up the possible ways that this could be done, I guess using [`Ngrams`](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-ngram-tokenfilter.html) is the right solution for us.
-<br>
 <br>
 
 > ### From Requirement 4 we need to schedule task to update `messages_count` and `chats_count`
@@ -68,13 +63,11 @@ After looking up the possible ways that this could be done, I guess using [`Ngra
 After looking up i found a gem called [`Whenever`](https://github.com/javan/whenever) which we can use to schedule tasks easily.
 
 <br>
-<br>
 
 > ### From Requirement 5 we need to set a messaging queue
 
 I think [`RabbitMQ`](https://www.rabbitmq.com/tutorials/tutorial-one-ruby.html) fit well with our needs
 
-<br>
 <br>
 
 > ### From Requirement 6 we need to adjust the database indices to minimize the response time.
@@ -117,7 +110,6 @@ I assume that we are using B-Tree indexing
 - We must `isolate` our fields in the WHERE Clause too.
 
   <br>
-  <br>
 
 > ### From Requirement 7 we need to compose up elasticsearch, mysql, rabbitmq, rails.
 
@@ -146,7 +138,6 @@ docker-compose down
 ```
 
 <br>
-<br>
 
 > ### From Requirement 8 we need to write specs for our api(in-progress).
 
@@ -154,7 +145,6 @@ docker-compose down
 
 - [ ] 💡 I'll use [Faker]('https://github.com/faker-ruby/faker') to generate fake/random data and just make reqs with these data and verify the response that we got back.
 
-<br>
 <br>
 
 ## Getting start locally
